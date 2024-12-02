@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    padding-top: 60px
+}
+
+header {
+    background: linear-gradient(45deg, #007bff, #6610f2);
+}
+
+footer {
+    background-color: #343a40;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+main h2 {
+    color: #007bff;
+}
+
+.hero {
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    border-bottom: 5px solid #0d6efd;
+}
+
+.hero-fullscreen {
+    height: 100vh;
+    /* Full viewport height */
+    background-size: cover;
+    /* Ensure the background image covers the entire section */
+    background-position: center;
+    /* Center the background image */
+    display: flex;
+    /* Use flexbox to center content */
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    /* Center content vertically */
+    text-align: center;
+    /* Center the text */
+}
+
+.hero h1 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}
+
+.hero a {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+textarea {
+    resize: vertical;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+}
+
+#displayContent {
+    background-color: #f8f9fa;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
+}
+
+.text-box {
+    border: 3px solid #3498db;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 1.0);
+    padding: 40px;
+}

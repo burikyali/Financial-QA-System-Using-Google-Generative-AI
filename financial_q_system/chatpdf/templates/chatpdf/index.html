@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Q&A System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero bg-light text-center py-5"
+        style="background-image: url('static/images/hero-background.jpg'); background-size: cover; background-position: center;">
+        <div class="container">
+            <div class="text-box">
+                <h1 class="display-4 text-primary">Welcome to Financial Q&A System</h1>
+                <p class="lead text-secondary">Upload your documents or paste text to get precise answers powered by
+                    NLP.</p>
+            </div>
+            <a href="#upload-section" class="btn btn-primary btn-lg mt-3">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Financial Q&A</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'process_pdfs' %}">Home</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'features' %}">Features</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div id="upload-section" class="row align-items-center">
+            <div class="col-lg-6">
+                <h2>Upload Financial Documents</h2>
+                <p>Use our Natural Language Processing Engine powered by Google Generative AI to gain insights.</p>
+                <form id="processForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="pdf_files" class="form-label">Upload PDF</label>
+                        <input type="file" class="form-control" id="pdf_files" name="pdf_files"
+                            accept="application/pdf">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="processBtn">Process</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <img src="static/images/upload-placeholder.jpg" alt="Upload Illustration">
+            </div>
+        </div>
+
+        <div id="qa-section" class="mt-5">
+            <h2>Ask a Question</h2>
+            <form id="questionForm">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="question" class="form-label">Your Question</label>
+                    <input type="text" class="form-control" id="question" name="question"
+                        placeholder="Type your question here..." required>
+                </div>
+                <button type="button" class="btn btn-success" id="askBtn">Ask</button>
+            </form>
+            <div id="resultBox" class="mt-3 border p-3">
+                <h3>Answer:</h3>
+                <p id="answerText"><span id="placeholderText" class="text-secondary">Your answer will appear here after
+                        you ask a question.</span></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 text-center">
+        <p>&copy; Financial Q&A System Using NLP</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Integrate existing JavaScript for buttons (process and ask functionalities)
+        $('#processBtn').click(function () {
+            const formData = new FormData($('#processForm')[0]);
+            const pdfFiles = $('#pdf_files')[0].files;
+
+            if (!pdfFiles.length) {
+                alert("Please upload a PDF file.");
+                return;
+            }
+
+            $.ajax({
+                url: '/',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert(response.message);
+                },
+                error: function () {
+                    alert("Error processing the PDF file.");
+                }
+            });
+        });
+
+        $('#askBtn').click(function () {
+            const question = $('#question').val();
+            if (!question) {
+                alert("Please enter a question.");
+                return;
+            }
+
+            $.ajax({
+                url: '/ask/',
+                type: 'POST',
+                data: $('#questionForm').serialize(),
+                success: function (response) {
+                    $('#placeholderText').hide();
+                    $('#answerText').text(response.answer);
+                },
+                error: function () {
+                    alert("Error fetching the answer.");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

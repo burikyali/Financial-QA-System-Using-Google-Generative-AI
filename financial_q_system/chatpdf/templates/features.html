@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Financial Q&A</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'process_pdfs' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'features' %}">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Carousel -->
+    <div id="featuresCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#featuresCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#featuresCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#featuresCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/feature1.jpg' %}" class="d-block w-100" alt="Feature 1"
+                    style="max-height: 700px; object-fit: cover;">
+                <div class="carousel-caption">
+                    <h5>Accurate NLP-Based QA</h5>
+                    <p>Get precise answers from your documents with state-of-the-art AI models.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/feature2.jpg' %}" class="d-block w-100" alt="Feature 2"
+                    style="max-height: 700px; object-fit: cover;">
+                <div class="carousel-caption">
+                    <h5>PDF and Text Compatibility</h5>
+                    <p>Upload PDFs or paste text seamlessly for processing.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/feature3.jpg' %}" class="d-block w-100" alt="Feature 3"
+                    style="max-height: 700px; object-fit: cover;">
+                <div class="carousel-caption">
+                    <h5>Interactive Feedback Mechanism</h5>
+                    <p>Share your experience and help us improve further.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuresCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuresCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 text-center">
+        <p>2024 Financial Q&A System using NLP</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
