@@ -4,7 +4,7 @@ from .utils import (
     get_text_chunks,
     get_vector_store,
     get_response,
-)  # Import functions from utils.py
+)
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
@@ -28,7 +28,6 @@ def process_pdfs(request):
             file_url = fs.url(filename)
             file_urls.append(file_url)
 
-            # Process the file (optional: you can keep the processing logic if needed)
             raw_text = get_pdf_text([pdf])
             text_chunks = get_text_chunks(raw_text)
             get_vector_store(text_chunks)
@@ -79,7 +78,6 @@ def feedback(request):
     return render(request, "feedback.html")
 
 
-from django.shortcuts import render, redirect
 from .models import Feedback
 
 

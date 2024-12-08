@@ -1,8 +1,3 @@
-document.getElementById("uploadForm")?.addEventListener("submit", function (e) {
-    e.preventDefault();
-    alert("File uploaded and question submitted!");
-});
-
 document.getElementById('fileInput').addEventListener('change', function () {
     const file = this.files[0];
     const displayContent = document.getElementById('displayContent');

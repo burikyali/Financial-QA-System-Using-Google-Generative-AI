@@ -40,10 +40,12 @@ def get_response(query):
     docs = store.similarity_search(query)
 
     prompt_template = """
-    Answer the question as detailed as possible from the provided context. If the answer is not in the context, 
-    reply with: 'Answer is not available in the context.'\n
-    Context: {context}\n
-    Question: {question}\n
+    You are a highly knowledgeable financial advisor with expertise in financial systems, analysis, and decision-making. Based on the following context, provide a detailed and accurate answer to the question. Ensure the answer is relevant, clear, and professional. If the answer cannot be found in the provided context, respond with: 'Answer is not available in the context.'
+
+    Context: {context}
+
+    Question: {question}
+
     Answer:
     """
     prompt = PromptTemplate(
@@ -56,22 +58,3 @@ def get_response(query):
         {"input_documents": docs, "question": query}, return_only_outputs=True
     )
     return result["output_text"]
-
-
-def process_pdf_file(pdf_path):
-    """
-    Process the uploaded PDF, extract text, chunk the text, and store the embeddings in the vector store.
-    """
-    # Read PDF text
-    text = get_pdf_text([pdf_path])  # Pass a list with the pdf file path
-    if not text:
-        print(f"No text extracted from {pdf_path}")
-        return
-
-    # Split the text into chunks
-    text_chunks = get_text_chunks(text)
-
-    # Get or create a vector store for the chunks
-    get_vector_store(text_chunks)  # This will save the FAISS index locally
-
-    print(f"Processed PDF file: {pdf_path}")
