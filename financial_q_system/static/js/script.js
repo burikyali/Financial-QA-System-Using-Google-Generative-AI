@@ -1,19 +1,36 @@
-document.getElementById('fileInput').addEventListener('change', function () {
-    const file = this.files[0];
-    const displayContent = document.getElementById('displayContent');
+// Change background color on hover for the submit button
+const submitButton = document.getElementById('submitBtn');
 
-    if (file && file.type === "application/pdf") {
-        const fileURL = URL.createObjectURL(file);
-        displayContent.innerHTML = `<iframe src="${fileURL}" width="100%" height="100%" style="border: none;"></iframe>`;
+submitButton.addEventListener('mouseenter', function () {
+    submitButton.style.backgroundColor = '	#008000'; // New color on hover
+});
+
+submitButton.addEventListener('mouseleave', function () {
+    submitButton.style.backgroundColor = ''; // Reset to original color
+});
+
+
+// Toggle dark mode
+const darkModeToggle = document.getElementById('darkModeToggle');
+
+darkModeToggle.addEventListener('click', function () {
+    document.body.classList.toggle('bg-dark');  // Toggle dark background
+    document.body.classList.toggle('text-white');  // Toggle text color
+    darkModeToggle.classList.toggle('btn-light');  // Toggle button style
+    darkModeToggle.classList.toggle('btn-dark');
+});
+
+
+// JavaScript to toggle visibility of the upload section
+const toggleButton = document.getElementById('toggleUploadSection');
+const uploadSection = document.getElementById('upload-section');
+
+toggleButton.addEventListener('click', function () {
+    // Toggle the display style of the upload section between 'none' and 'block'
+    if (uploadSection.style.display === 'none') {
+        uploadSection.style.display = 'block'; // Show the section
     } else {
-        displayContent.innerHTML = "<p class='text-danger'>Please upload a valid PDF file.</p>";
+        uploadSection.style.display = 'none'; // Hide the section
     }
 });
-
-
-document.getElementById('textInput').addEventListener('input', function () {
-    const displayContent = document.getElementById('displayContent');
-    displayContent.textContent = this.value;
-});
-
 
